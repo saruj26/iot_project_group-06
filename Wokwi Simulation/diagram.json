@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-breadboard-half", "id": "bb1", "top": 102.6, "left": -400.4, "attrs": {} },
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 326.4, "left": 158.44, "attrs": {} },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "pir1",
+      "top": -149.6,
+      "left": -55.38,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": -166.4,
+      "left": 437.6,
+      "attrs": { "pins": "i2c" }
+    },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -153.3, "left": -418.2, "attrs": {} },
+    { "type": "wokwi-membrane-keypad", "id": "keypad1", "top": 689.2, "left": 130.4, "attrs": {} },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": 691.4, "left": 1027.2, "attrs": {} },
+    { "type": "wokwi-a4988", "id": "drv1", "top": 283.2, "left": 907.2, "attrs": {} },
+    {
+      "type": "wokwi-stepper-motor",
+      "id": "stepper1",
+      "top": -63.59,
+      "left": 922.03,
+      "attrs": { "size": "17" }
+    },
+    { "type": "wokwi-servo", "id": "servo1", "top": 506.8, "left": -451.2, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "drv1:2B", "stepper1:B-", "green", [ "h0" ] ],
+    [ "drv1:2A", "stepper1:B+", "green", [ "h0" ] ],
+    [ "drv1:1A", "stepper1:A+", "green", [ "h0" ] ],
+    [ "drv1:1B", "stepper1:A-", "green", [ "h0" ] ],
+    [ "keypad1:R1", "esp:13", "green", [ "v38.4", "h-134.4", "v-28.8" ] ],
+    [ "keypad1:R2", "esp:12", "green", [ "v48", "h-154", "v-604.8" ] ],
+    [ "keypad1:R3", "esp:14", "green", [ "v57.6", "h-173.1", "v-633.6" ] ],
+    [ "keypad1:R4", "esp:15", "green", [ "v67.2", "h-201.8", "v-518.4", "h230.4", "v-76.8" ] ],
+    [ "keypad1:C1", "esp:27", "green", [ "v76.8", "h-220.9", "v-652.8" ] ],
+    [ "keypad1:C2", "esp:25", "green", [ "v86.4", "h-240", "v-672" ] ],
+    [ "keypad1:C3", "esp:33", "green", [ "v96", "h-259.35", "v-700.8" ] ],
+    [ "keypad1:C4", "esp:32", "green", [ "v105.6", "h-278.7", "v-729.6" ] ],
+    [ "servo1:PWM", "esp:26", "gold", [ "h-19.2", "v-19" ] ],
+    [ "dht1:SDA", "esp:23", "magenta", [ "v48", "h691.3", "v336" ] ],
+    [ "pir1:OUT", "esp:4", "limegreen", [ "v38.4", "h316.66", "v489.6" ] ],
+    [ "lcd1:SDA", "esp:21", "orange", [ "h-57.6", "v201.8" ] ],
+    [ "lcd1:SCL", "esp:22", "orange", [ "h-48", "v470.7" ] ],
+    [ "drv1:ENABLE", "esp:5", "purple", [ "h-57.6", "v105.6" ] ],
+    [ "esp:5V", "bb1:bp.25", "red", [ "h0" ] ],
+    [ "esp:CMD", "bb1:tn.25", "black", [ "h-191.85", "v-288" ] ],
+    [ "esp:3V3", "dht1:VCC", "red", [ "h-143.85", "v-336", "h-144", "v0", "h-278.4" ] ],
+    [ "dht1:GND", "bb1:tn.11", "black", [ "v38.4", "h124.8" ] ],
+    [ "pir1:GND", "bb1:tn.12", "black", [ "v57.6", "h-115.46" ] ],
+    [ "lcd1:GND", "bb1:tn.13", "black", [ "h-76.8", "v163.2", "h-585.6" ] ],
+    [ "relay1:IN", "esp:2", "#8f4814", [ "h-115.2", "v-240.2" ] ],
+    [
+      "relay1:GND",
+      "bb1:tn.24",
+      "black",
+      [ "h-19.2", "v239.6", "v326.4", "h-1046.4", "v-1238.4", "h-68.8" ]
+    ],
+    [ "pir1:VCC", "bb1:bp.24", "red", [ "v364.8", "h-88" ] ],
+    [ "lcd1:VCC", "bb1:bp.23", "red", [ "h-67.2", "v441.7", "h-491.2" ] ],
+    [ "relay1:VCC", "bb1:bp.18", "red", [ "h-28.8", "v566.4", "h-1171.2", "v-987.9" ] ],
+    [ "drv1:VMOT", "bb1:bp.19", "red", [ "h134.55", "v384.08", "h-115.2", "v595.2", "h-1144" ] ],
+    [
+      "drv1:GND.2",
+      "bb1:tn.23",
+      "black",
+      [ "h124.95", "v364.88", "h-115.2", "v595.2", "h-1017.6", "v-1200", "h-68.8" ]
+    ],
+    [
+      "drv1:VDD",
+      "bb1:bp.20",
+      "red",
+      [ "h86.55", "v297.68", "h-96", "v595.2", "h-537.6", "h-566.4", "v-441.6", "v-507.9" ]
+    ],
+    [
+      "drv1:GND.1",
+      "bb1:tn.22",
+      "black",
+      [ "v0.08", "h76.95", "v278.4", "h-96", "v595.2", "h-998.4", "v-1161.6", "h-68.8" ]
+    ],
+    [ "drv1:STEP", "esp:18", "purple", [ "h-67.2", "v86.4", "h-595.2" ] ],
+    [ "drv1:DIR", "esp:19", "purple", [ "h-76.8", "v67.2" ] ],
+    [ "servo1:V+", "bb1:bp.17", "red", [ "h-28.8", "v-134.3", "h268.8", "v0", "h28.8" ] ],
+    [ "servo1:GND", "bb1:tn.10", "black", [ "h-38.4", "v-528", "h219.2" ] ]
+  ],
+  "dependencies": {}
+}
